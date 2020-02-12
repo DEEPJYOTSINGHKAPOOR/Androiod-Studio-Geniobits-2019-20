@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.SignUpForm"
+    tools:context=".Activities.RegisterActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/colorPrimary">
+    >
 
     <ImageView android:layout_height="120dp"
         android:layout_width="wrap_content"
@@ -22,44 +22,59 @@
         android:id="@+id/text_input_emailID"
         android:gravity="center_horizontal"
         app:errorEnabled="true"
+
         >
 
         <EditText
             android:layout_width="190dp"
             android:layout_height="41dp"
-            android:id="@+id/email_signUpFormID"
+            android:id="@+id/email_RegisterActivityID"
             android:layout_marginTop="20dp"
             android:height="41dp"
             android:hint="@string/email"
+            android:textColor="@color/black"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/colorPrimary" />
+            android:textColorHint="@color/green_light" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_input_userNameID"
+        android:id="@+id/text_input_firstNameID"
         android:gravity="center_horizontal"
         app:errorEnabled="true"
         >
         <EditText android:layout_height="41dp"
             android:layout_width="190dp"
-            android:id="@+id/username_signUpFormID"
+            android:id="@+id/firstname_RegisterActivityID"
             android:height="41dp"
-            android:hint="@string/username"
+            android:hint="FirstName"
+            android:textColor="@color/black"
             android:inputType="textPersonName"
             android:layout_marginTop="20dp"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/green_light"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_input_lastNameID"
+        android:gravity="center_horizontal"
+        app:errorEnabled="true"
+        >
+        <EditText android:layout_height="41dp"
+            android:layout_width="190dp"
+            android:id="@+id/lastname_RegisterActivityID"
+            android:height="41dp"
+            android:hint="LastName"
+            android:textColor="@color/black"
+            android:inputType="textPersonName"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/green_light"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
@@ -71,16 +86,13 @@
             android:layout_width="190dp"
             android:height="41dp"
             android:hint="@string/password"
+            android:textColor="@color/black"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
-            android:id="@+id/password_signUpFormID"
-            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/password_RegisterActivityID"
+            android:textColorHint="@color/green_light"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -96,14 +108,13 @@
             android:height="41dp"
             android:hint="@string/reenter_password"
             android:layout_marginTop="20dp"
+            android:textColor="@color/black"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:inputType="textPassword"
-            android:id="@+id/reenterpassword_signUpFormID"
-            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/reenterpassword_RegisterActivityID"
+            android:textColorHint="@color/green_light"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
 
@@ -116,11 +127,12 @@
     <EditText
         android:layout_width="190dp"
         android:layout_height="41dp"
-        android:id="@+id/phoneNumber_signUpFormID"
+        android:id="@+id/phoneNumber_RegisterActivityID"
         android:layout_marginTop="20dp"
         android:inputType="phone"
+        android:textColor="@color/black"
         android:hint="@string/phonenumber"
-        android:textColorHint="@color/colorPrimary"
+        android:textColorHint="@color/green_light"
         />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,22 +169,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female"
+                android:textColorHint="@color/green_light"
                 android:textColor="#000000"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="3dp"
-                />
+                android:paddingStart="3dp" />
         </RadioGroup>
 </LinearLayout>
-
-
-
     <Button android:layout_height="41dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/register"
+        android:textColor="@color/white"
         android:id="@+id/register_signupID"
-        android:background="@drawable/bg"
+        android:background="@drawable/button_shape"
         />
 </LinearLayout>

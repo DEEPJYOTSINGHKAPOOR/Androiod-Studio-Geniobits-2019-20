@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 
 import com.example.loginproject.Models.User;
 import com.example.loginproject.R;
@@ -17,28 +18,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        getSupportActionBar().hide();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                User user=new User(getApplicationContext()) ;
-                if(user.getToken()!=null){
-                    Intent intent =new Intent(MainActivity.this,ProfileUser.class) ;
-
-                    intent.putExtra("username",user.getUsername());
-                    intent.putExtra("phone_no",user.getPhoneNumber());
-                    intent.putExtra("email",user.getEmail());
-
-                    startActivity(intent);
-
-//                    startActivity(new Intent(MainActivity.this,ProfileUser.class));
+                if(new User(MainActivity.this).getToken().equals("") || new User(MainActivity.this).getToken()==null )
+                {
+                    startActivity(new Intent(MainActivity.this,JoinAGymActivity.class));
+                    finish() ;
+                }else{
+                    startActivity(new Intent(MainActivity.this , JoinAGymActivity.class));
                     finish();
                 }
-                else{
-                    startActivity(new Intent(MainActivity.this , LoginActivity.class));
-                    finish();
-                }
+
+
             }
         },1300);
     }

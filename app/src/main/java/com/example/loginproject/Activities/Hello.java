@@ -23,7 +23,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.loginproject.Models.MySingleton;
+//import com.example.loginproject.Models.MySingleton;
 import com.example.loginproject.R;
 
 import org.json.JSONArray;
@@ -120,7 +120,7 @@ public class Hello extends AppCompatActivity {
 
 //                requestQueue.add(stringRequest);
 
-                MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+//                MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
 
                 ImageRequest imageRequest=new ImageRequest(image_url,
@@ -141,7 +141,7 @@ public class Hello extends AppCompatActivity {
 
                 );
 
-                MySingleton.getInstance(Hello.this).addToRequestQueue(imageRequest);
+//                MySingleton.getInstance(Hello.this).addToRequestQueue(imageRequest);
 
 
                 startActivity(new Intent(Hello.this,Hi.class));

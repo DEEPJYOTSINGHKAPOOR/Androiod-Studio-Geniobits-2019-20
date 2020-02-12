@@ -8,21 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.loginproject.Models.MySingleton;
-import com.example.loginproject.Models.User;
 import com.example.loginproject.R;
-import com.example.loginproject.Utils.Helper;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,17 +27,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText userNameET ;
+    private EditText emailET ;
     private EditText passwordET ;
     private Button loginBT ;
     private static final String TAG = "LoginActivity";
     private TextView registerTV ;
 
-//    private final String nameCurrent="kapoordeepjyotsingh29@gmail.com" ;
-//    private final String passwordCurrent="12345" ;
-
-//    String login_url="http://192.168.137.1:8000/login_user/";
-
+    private TextView mForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,50 +42,46 @@ public class LoginActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: create ho gaya mere bhai");
 
-        userNameET=findViewById(R.id.username_loginID);
+        emailET=findViewById(R.id.email_loginID);
         passwordET=findViewById(R.id.password_loginID);
         loginBT=findViewById(R.id.button_loginID);
         registerTV=findViewById(R.id.register_loginID);
+        mForgotPassword=findViewById(R.id.forgotPassword_loginId);
 
 
-         final String username1=userNameET.getText().toString();
-         final String password1=passwordET.getText().toString();
+        final String email1 ;
+        final String phoneNumber1 ;
+
         loginBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: On click working sahi se.");
-//                authenticateUser(userNameET.getText().toString(),passwordET.getText().toString());
+                final String email1=emailET.getText().toString();
+                final String password1=passwordET.getText().toString();
+
+                Log.d(TAG, "onClick: Login Button Clicked.");
+                Log.d(TAG, "email is : "+email1);
+                Log.d(TAG, "pass is : "+password1);
 
 
-             final StringRequest stringRequest =new StringRequest(Request.Method.POST, Helper.LOGIN_URL,
+                final StringRequest stringRequest =new StringRequest(Request.Method.POST, com.example.loginproject.Utils.Urls.LOGIN_URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
                                 try {
-
                                     JSONObject jsonObject =new JSONObject(response);
-
-//                                    User user=new User(getApplicationContext());
-//                                    user.setToken(jsonObject.getString("token"));
-
-                                    User user=new User(getApplicationContext());
-                                    user.setToken(jsonObject.getString("token"));
-                                    user.setEmail(jsonObject.getString("email"));
-                                    user.setUsername(jsonObject.getString("username"));
-                                    user.setPhoneNumber(jsonObject.getString("phone_no"));
-
                                     if(jsonObject.getString("error").equals("False")){
-
+                                        Toast.makeText(LoginActivity.this, "in if and:"+jsonObject.getString("token"), Toast.LENGTH_SHORT).show();
                                         Intent intent=new Intent(LoginActivity.this,ProfileUser.class);
-                                     //   Intent intent =new Intent(LoginActivity.this,ProfileUser.class);
-                                       // intent.putExtra("token",jsonObject.getString("token"));
+                                        intent.putExtra("token",jsonObject.getString("token"));
                                         startActivity(intent);
-
                                     }else{
-                                        Toast.makeText(LoginActivity.this, "In valid user name or password .", Toast.LENGTH_SHORT).show();
+                                        Log.e(TAG, "onResponse: "+jsonObject.getString("message") );
+                                        Toast.makeText(LoginActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        startActivity(getIntent());
+                                        finish();
                                     }
                                 } catch (JSONException e) {
+                                    Log.e(TAG, "onResponse: In catch "+e.getLocalizedMessage());
                                     Toast.makeText(LoginActivity.this, "nooooo.", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
                                 }
@@ -103,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "onErrorResponse: "+ error.getLocalizedMessage() );
                                 Toast.makeText(LoginActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 error.printStackTrace();
                             }
@@ -111,45 +100,25 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams(){
                         Map<String,String>params=new HashMap<String,String>();
-                        params.put("username",username1);
+                        params.put("email",email1);
                         params.put("password",password1);
                         return params;
                     }
                 };
-//                RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
-//                requestQueue.add(stringRequest);
-                   MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+
+                RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+                requestQueue.add(stringRequest);
+
             }
-
         });
-
         registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,SignUpForm.class));
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 finish();
             }
         });
-
     }
 
-
-    private void authenticateUser(String username1,String password1){
-        Log.d(TAG, "authenticateUser: authentication ke andar ho app");
-        if(username1.isEmpty() || password1.isEmpty()){
-            Toast.makeText(LoginActivity.this, "Username or Password Field can't be empty . ", Toast.LENGTH_SHORT).show();
-            return ;
-        }
-        else{
-            if(username1.length()<3 ){
-                Toast.makeText(LoginActivity.this, "UserName is invalid.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            else if(password1.length()<4){
-                Toast.makeText(LoginActivity.this, "Password too short!", Toast.LENGTH_SHORT).show();
-                return ;
-            }
-        }
-    }
 
 }

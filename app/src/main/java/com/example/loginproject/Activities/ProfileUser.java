@@ -12,26 +12,22 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.loginproject.Models.MySingleton;
-import com.example.loginproject.Models.User;
+//import com.example.loginproject.Models.MySingleton;
 import com.example.loginproject.R;
-import com.example.loginproject.Utils.Helper;
+import com.example.loginproject.Utils.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileUser extends AppCompatActivity {
-
+    
+    private static String TAG="ProfileUser";
     private TextView userNameTV ;
     private TextView emailTV;
     private TextView phoneNumberTV ;
@@ -50,15 +46,9 @@ public class ProfileUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_user);
-
+        
         final String token1 = getIntent().getStringExtra("token");
 
-
-        final String username3=getIntent().getStringExtra("username");
-
-        final String email3=getIntent().getStringExtra("email");
-
-        final String phoneNumber3=getIntent().getStringExtra("phone_no");
 
 
         userNameTV=findViewById(R.id.username_profileID);
@@ -69,15 +59,50 @@ public class ProfileUser extends AppCompatActivity {
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfileUser.this, "Logout Successful.", Toast.LENGTH_SHORT).show();
-                new User(ProfileUser.this).removeUser();
-                startActivity(new Intent(ProfileUser.this, LoginActivity.class));
-                finish();
+
+                StringRequest stringRequest =new StringRequest(Request.Method.POST, Urls.LOGOUT_URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(ProfileUser.this, "Logout Successful.", Toast.LENGTH_SHORT).show();
+                                try {
+                                    JSONObject jsonObject=new JSONObject(response);
+
+                                    if(jsonObject.getString("error").equals("False")){
+                                        Toast.makeText(ProfileUser.this, "If meee hu.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(ProfileUser.this,LoginActivity.class));
+                                    }else{
+                                        Log.e(TAG, "onResponse:LOGOUT BUTTON "+" else of logout");
+                                        startActivity(new Intent(ProfileUser.this,LoginActivity.class));
+                                    }
+
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "onResponse: LOGOUT BUTTON "+e.getLocalizedMessage());
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "onErrorResponse: "+error.getLocalizedMessage());
+                                Toast.makeText(ProfileUser.this, "Error of Profile User.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params =new HashMap<String, String>();
+                        params.put("token",token1);
+                        return params;
+                    }
+                };
             }
         });
 
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Helper.PROFILE_URL,
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.PROFILE_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -86,19 +111,22 @@ public class ProfileUser extends AppCompatActivity {
                             username1="UserName : "+jsonObject.getString("username");
                             email1="Email : "+jsonObject.getString("email") ;
                             phoneNumber1="Phone Number : "+jsonObject.getString("phone_no");
-                           error1=jsonObject.getString("error");
-                           message1=jsonObject.getString("message");
-                           token2=jsonObject.getString("token");
+                            error1=jsonObject.getString("error");
+                            message1=jsonObject.getString("message");
+                            token2=jsonObject.getString("token");
 
                            if(error1.equals("False")){
                                userNameTV.setText(username1);
-                               emailTV.setText(email1);
-                               phoneNumberTV.setText(phoneNumber1);
+                                emailTV.setText(email1);
+                                phoneNumberTV.setText(phoneNumber1);
                            }else{
                                Toast.makeText(ProfileUser.this, "Else mee hu ", Toast.LENGTH_SHORT).show();
+                               Intent intent=new Intent(ProfileUser.this,LoginActivity.class);
+                               startActivity(intent);
                            }
                         } catch (JSONException e) {
-                            Toast.makeText(ProfileUser.this, "json catch occured", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ProfileUser.this, "json catch occured", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "onResponse: JSONEXCEPTION  " + e.getLocalizedMessage());
                             e.printStackTrace();
                         }
                     }
@@ -120,17 +148,6 @@ public class ProfileUser extends AppCompatActivity {
                 return params;
             }
         };
-
-                RequestQueue requestQueue = Volley.newRequestQueue(ProfileUser.this);
-                requestQueue.add(stringRequest);
 //        MySingleton.getInstance(ProfileUser.this).addToRequestQueue(stringRequest);
-
-
-//        userNameTV.setText(username3);
-
-//        emailTV.setText(email3);
-
-//        phoneNumberTV.setText(phoneNumber3);
     }
-
 }

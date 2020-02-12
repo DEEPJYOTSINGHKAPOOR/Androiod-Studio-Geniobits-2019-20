@@ -10,8 +10,8 @@
     android:gravity="center"
     >
 
-    <TextView
-        android:id="@+id/otpenter_otpTV"
+    <EditText
+        android:id="@+id/otpenter_otpET"
         android:layout_width="wrap_content"
         android:layout_height="40sp"
         android:layout_marginTop="40dp"

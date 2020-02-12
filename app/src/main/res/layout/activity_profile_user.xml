@@ -15,8 +15,7 @@
         android:layout_height="250dp"
         android:layout_marginTop="100dp"
         android:src="@mipmap/avatar1"
-        app:civ_border_width="2dp"
-        />
+        app:civ_border_width="2dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -25,8 +24,6 @@
         android:gravity="center_horizontal"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-
-
         >
 
         <TextView
@@ -35,6 +32,7 @@
             android:id="@+id/username_profileID"
             android:height="40dp"
             android:textSize="25sp"
+            android:background="#fff"
 
             />
 
@@ -55,11 +53,10 @@
             android:id="@+id/email_profileID"
             android:textSize="25sp"
             android:height="40dp"
+            android:background="#fff"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +73,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/phoneNumber_profileID"
             android:height="40dp"
-            android:textSize="25sp" />
+            android:textSize="20sp"
+            android:background="#fff"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/logout_profileID"
+        android:layout_marginTop="30dp"
         android:text="LOGOUT"
         />
 

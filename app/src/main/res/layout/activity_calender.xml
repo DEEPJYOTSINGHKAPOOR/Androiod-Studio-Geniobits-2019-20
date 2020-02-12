@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.CalenderActivity"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="ExtraText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/calender_currentMonthId"
+        android:background="@color/white"
+        android:textStyle="italic|bold"
+        android:textSize="40sp"
+        android:textColor="@color/green_light"
+        android:hint="Month-Year"
+        android:textColorHint="@color/green_light"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calender_CalenderViewId"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:compactCalendarTextSize="16sp"
+        app:compactCalendarTextColor="@color/green_light"
+        app:compactCalendarMultiEventIndicatorColor="#03A9F4"
+        app:compactCalendarCurrentDayBackgroundColor="#00B71C1C"
+        >
+
+    </com.github.sundeepk.compactcalendarview.CompactCalendarView>
+<!--        app:compactCalendarCurrentDayBackgroundColor="#FFEB3B"-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:id="@+id/greenDot"
+            android:src="@drawable/small_dots"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:id="@+id/presentDotsId"
+            android:layout_toRightOf="@+id/greenDot"
+            android:text="Present Dates"
+            android:textColor="@color/green_light"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:id="@+id/redDot"
+            android:src="@drawable/small_dots_black"
+            android:layout_toRightOf="@+id/presentDotsId"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:id="@+id/gymClosed"
+            android:layout_toRightOf="@+id/redDot"
+            android:text="Gym Closed"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            />
+
+    </RelativeLayout>
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/calender_streakCountTextId"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:textColor="@color/green_light"
+        android:textStyle="italic"
+        android:layout_marginRight="20dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/calender_AttendedSessionsThisMonthId"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/green_light"
+        android:textStyle="italic"
+        android:layout_marginRight="20dp"
+        />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_shape"
+            android:text="YOUR ATTENDANCE GRAPH."
+            android:textColor="@color/green_light"
+
+            />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/calender_barGraphId"
+            />
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.JoinAGymActivity"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:id="@+id/fullName_JoinAGymId"
+        android:hint="@string/nameOfPerson"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:id="@+id/DOB_JoinAGymId"
+        android:text="Date OF Birth"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        />
+
+
+
+
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/proceed_JoinAGymId"
+    android:text="Proceed"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp"
+    />
+
+
+</LinearLayout>

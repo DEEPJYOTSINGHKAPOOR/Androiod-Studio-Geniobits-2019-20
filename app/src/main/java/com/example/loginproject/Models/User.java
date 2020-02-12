@@ -4,80 +4,79 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class User {
-    public String getToken() {
-        token = sharedPreferences.getString("token","");
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
-//        System.out.println(token+"is set");
-        sharedPreferences.edit().putString("token",this.token).apply();
-    }
+    public static final String SHARED_PREFS="user_details";
 
-    public User(Context context){
-        this.context=context ;
-        sharedPreferences=context.getSharedPreferences("login_details",context.MODE_PRIVATE);
-    }
-    private Context context ;
+    public static final String EMAIL ="Email" ;
+
+    public static final String PHONENUMBER="";
+
+    public static final String USERNAME ="" ;
+
+    public static final String SWITCH1="" ;
+
+    public static final String TOKEN="";
+
+
     private String username;
-    private String password ;
-    private String token ;
-    private String phoneNumber ;
-    private String email ;
+    private String email;
+    private String phoneNumber;
+    private String token;
+    private Boolean switchOnOff ;
 
-    public String getEmail() {
-        return email;
+    Context context ;
+
+    SharedPreferences  sharedPreferences ;
+    //constructor.
+    public User(Context context) {
+        this.context = context;
+        sharedPreferences = context.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE) ;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-        sharedPreferences.edit().putString("email",this.email).apply();
-    }
-
-    private String error ;
-    SharedPreferences sharedPreferences ;
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        sharedPreferences.edit().putString("phone_no",this.phoneNumber).apply();
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-        sharedPreferences.edit().putString("error",this.error).apply();
-    }
+    //getters and setters .
 
     public String getUsername() {
-        username = sharedPreferences.getString("username","");
+        username=sharedPreferences.getString(USERNAME,"");
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-        sharedPreferences.edit().putString("username",this.username).apply();
+        sharedPreferences.edit().putString(USERNAME,username).apply();
     }
-
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        email=sharedPreferences.getString(EMAIL,"");
+        return email;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
+        sharedPreferences.edit().putString(EMAIL,email).apply();
     }
-
-    public void removeUser()
-    {
-        sharedPreferences.edit().clear().commit();
+    public String getPhoneNumber() {
+        phoneNumber=sharedPreferences.getString(PHONENUMBER,"");
+        return phoneNumber;
     }
-
-
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        sharedPreferences.edit().putString(PHONENUMBER,phoneNumber).apply();
+    }
+    public Boolean getSwitchOnOff() {
+        switchOnOff = sharedPreferences.getBoolean(SWITCH1,false);
+        return switchOnOff;
+    }
+    public void setSwitchOnOff(Boolean switchOnOff) {
+        this.switchOnOff = switchOnOff;
+        sharedPreferences.edit().putBoolean(SWITCH1,switchOnOff).apply();
+    }
+    public void removeUser(){
+        sharedPreferences.edit().clear().apply();
+    }
+    public String getToken() {
+        token=sharedPreferences.getString(TOKEN,""); // default token is empty
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+        sharedPreferences.edit().putString(TOKEN,"").apply();
+    }
 }

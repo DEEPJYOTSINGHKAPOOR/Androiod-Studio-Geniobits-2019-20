@@ -14,12 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.Otp"></activity>
+        <activity android:name=".Activities.JoinAGymActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="GymShym.com" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.VerifyEmailActivity" />
+        <activity android:name=".Activities.AttendanceGraphActivity" />
+        <activity android:name=".Activities.CalenderActivity" />
+        <activity android:name=".Activities.HomeScreen" />
+        <activity android:name=".Activities.Otp" />
         <activity android:name=".Activities.ProfileUser" />
         <activity android:name=".Activities.Hi" />
         <activity android:name=".Activities.Hello" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.SignUpForm" />
+        <activity android:name=".Activities.RegisterActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />

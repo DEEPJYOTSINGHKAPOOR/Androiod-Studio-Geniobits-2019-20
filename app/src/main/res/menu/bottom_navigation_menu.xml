@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="HOME"
+        android:id="@+id/home_bottomID"
+        android:icon="@drawable/ic_home_black_24dp"
+        ></item>
+
+    <item android:title="Blog"
+        android:id="@+id/blog_bottomID"
+        android:icon="@drawable/ic_fitness_center_black_24dp"
+        ></item>
+
+
+    <item android:title="Video"
+        android:id="@+id/video_bottomID"
+        android:icon="@drawable/ic_video_library_black_24dp"
+        ></item>
+
+    <item android:title="Settings"
+        android:id="@+id/settings_bottomID"
+        android:icon="@drawable/ic_settings_black_24dp"
+        ></item>
+
+</menu>

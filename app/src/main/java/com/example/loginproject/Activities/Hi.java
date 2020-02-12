@@ -13,8 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.loginproject.Models.MySingleton;
-import com.example.loginproject.Models.User;
+//import com.example.loginproject.Models.MySingleton;
 import com.example.loginproject.R;
 
 import org.json.JSONException;
@@ -46,7 +45,6 @@ public class Hi extends AppCompatActivity {
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new User(Hi.this).removeUser();
                 Toast.makeText(Hi.this, "Logout successfully.", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Hi.this,LoginActivity.class));
                 finish();
@@ -87,7 +85,7 @@ public class Hi extends AppCompatActivity {
                 }
                 );
 
-                MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+//                MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
                 String message= getIntent().getStringExtra("message");
